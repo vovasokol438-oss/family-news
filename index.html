@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title> Сайт новости Соколов</title>
+  <title> Сайт семейные новости Соколов</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -10,7 +10,7 @@
     <h2>Добро пожаловать!</h2>
     <p>Введите пароль , чтобы увидеть семейные новости СОКОЛОВ </p>
     <input type="password" id="password" placeholder="Введите пароль">
-    <button onclick="checkPassword()">Войти</button>
+    <button onclick="checkPassword()">увидеть новости</button>
     <p id="message" class="error"></p>
   </div>
 
@@ -20,13 +20,14 @@
       let message = document.getElementById("message");
 
       // 🔑 Пароль для входа
-      if (pass === "29.11.1974") {
+      if (pass === "") {
         window.location.href = "secret.html";
       } else {
-        message.textContent = "Неверный пароль!";
+        message.textContent = "Похоже введён неверный пароль. Актуальный пароль можно узнать на канале ГОВОРИТ И ПОКАЗЫВАЕТ БАДЕН";
       }
     }
   </script>
 </body>
 
 </html>
+
