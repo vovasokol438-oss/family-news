@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Семейный сайт</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="box">
+    <h2>Добро пожаловать!</h2>
+    <p>Войдите, чтобы увидеть семейные новости</p>
+    <input type="password" id="password" placeholder="Введите пароль">
+    <button onclick="checkPassword()">Войти</button>
+    <p id="message" class="error"></p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      let pass = document.getElementById("password").value;
+      let message = document.getElementById("message");
+
+      // 🔑 Пароль для входа
+      if (pass === "29.11.1974") {
+        window.location.href = "secret.html";
+      } else {
+        message.textContent = "Неверный пароль!";
+      }
+    }
+  </script>
+</body>
+</html>
