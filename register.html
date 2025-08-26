@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация на сайт "Говорит и показывает Баден"</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .register-box {
+      background: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      width: 350px;
+      text-align: center;
+    }
+    input, label {
+      display: block;
+      width: 90%;
+      margin: 10px auto;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #aaa;
+    }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: #0077cc;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #005fa3;
+    }
+    .message {
+      margin-top: 15px;
+      font-size: 14px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Регистрация на сайт "Говорит и показывает Баден"</h2>
+    <input type="text" id="name" placeholder="Имя">
+    <input type="text" id="surname" placeholder="Фамилия">
+    <input type="date" id="birthdate" placeholder="Дата рождения">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Пароль (если хотите задать)">
+    <button onclick="register()">Зарегистрироваться</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    emailjs.init("F_eRZhQRJfY_X-rTh"); // ваш Public Key
+
+    function register() {
+      const name = document.getElementById("name").value.trim();
+      const surname = document.getElementById("surname").value.trim();
+      const birthdate = document.getElementById("birthdate").value;
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if(!name || !surname || !birthdate || !email) {
+        document.getElementById("message").textContent = "Пожалуйста, заполните все обязательные поля!";
+        return;
+      }
+
+      const templateParams = {
+        name: name,
+        surname: surname,
+        birthdate: birthdate,
+        user_email: email,
+        password: password
+      };
+
+      emailjs.send("service_gvpt8yt", "template_4ut5xtk", templateParams)
+        .then(function() {
+          document.getElementById("message").textContent = 
+            "Форма отправлена! Ожидайте данные для регистрации от vovasokol438@gmail.com.";
+        }, function(error) {
+          document.getElementById("message").textContent = "Ошибка отправки формы, попробуйте позже.";
+          console.error(error);
+        });
+    }
+  </script>
+</body>
+</html>
