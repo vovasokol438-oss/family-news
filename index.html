@@ -6,34 +6,42 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background: linear-gradient(135deg, #f2f2f2, #e0e0e0);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      text-align: center;
     }
     .login-box {
       background: white;
-      padding: 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
+    }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
     }
     input {
-      display: block;
-      width: 200px;
-      margin: 10px auto;
-      padding: 8px;
-      border-radius: 6px;
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px 0;
+      width: 90%;
+      border-radius: 8px;
       border: 1px solid #aaa;
     }
     button {
-      padding: 8px 16px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
       border: none;
-      border-radius: 6px;
       background: #0077cc;
       color: white;
       cursor: pointer;
+      transition: 0.3s;
     }
     button:hover {
       background: #005fa3;
@@ -43,15 +51,27 @@
       margin-top: 10px;
       font-size: 14px;
     }
+    p.register-link {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+    p.register-link a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    p.register-link a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="login-box">
-    <h2>Вход на сайт</h2>
+    <h2>Вход на сайт Говорит и показывает Баден</h2>
     <input type="text" id="username" placeholder="Имя">
     <input type="password" id="password" placeholder="Пароль">
     <button onclick="login()">Войти</button>
     <div class="error" id="error"></div>
+    <p class="register-link">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
   </div>
 
   <script>
@@ -71,8 +91,8 @@
       const errorDiv = document.getElementById("error");
 
       if (users[username] && users[username] === password) {
-        // Успешный вход
-        window.location.href = "main.html";
+        // Успешный вход — открываем secret.html
+        window.location.href = "secret.html";
       } else {
         errorDiv.textContent = "Неверный пароль или имя! Актуальный пароль можно узнать на канале \"Говорит и показывает Баден\"";
       }
@@ -86,6 +106,4 @@
     });
   </script>
 </body>
-
 </html>
-

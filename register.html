@@ -17,13 +17,13 @@
       padding: 20px 30px;
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      width: 350px;
       text-align: center;
+      width: 300px;
     }
-    input, label {
+    input, select {
       display: block;
-      width: 90%;
-      margin: 10px auto;
+      width: 100%;
+      margin: 10px 0;
       padding: 8px;
       border-radius: 6px;
       border: 1px solid #aaa;
@@ -35,42 +35,33 @@
       background: #0077cc;
       color: white;
       cursor: pointer;
+      width: 100%;
     }
     button:hover {
       background: #005fa3;
     }
     .message {
-      margin-top: 15px;
-      font-size: 14px;
       color: green;
+      font-size: 14px;
+      margin-top: 10px;
     }
   </style>
-</head>
-<body>
-  <div class="register-box">
-    <h2>Регистрация на сайт "Говорит и показывает Баден"</h2>
-    <input type="text" id="name" placeholder="Имя">
-    <input type="text" id="surname" placeholder="Фамилия">
-    <input type="date" id="birthdate" placeholder="Дата рождения">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Пароль (если хотите задать)">
-    <button onclick="register()">Зарегистрироваться</button>
-    <div class="message" id="message"></div>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    emailjs.init("F_eRZhQRJfY_X-rTh"); // ваш Public Key
+    (function(){
+      emailjs.init("F_eRZhQRJfY_X-rTh"); // Ваш Public Key
+    })();
 
-    function register() {
+    function sendRegistration() {
       const name = document.getElementById("name").value.trim();
       const surname = document.getElementById("surname").value.trim();
       const birthdate = document.getElementById("birthdate").value;
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value.trim();
+      const method = document.querySelector('input[name="method"]:checked').value;
 
-      if(!name || !surname || !birthdate || !email) {
-        document.getElementById("message").textContent = "Пожалуйста, заполните все обязательные поля!";
+      if(!name || !surname || !birthdate || !email || (method === 'custom' && !password)){
+        alert("Пожалуйста, заполните все поля!");
         return;
       }
 
@@ -78,19 +69,37 @@
         name: name,
         surname: surname,
         birthdate: birthdate,
-        user_email: email,
-        password: password
+        email: email,
+        password: method === 'custom' ? password : "Пароль будет сгенерирован",
+        method: method
       };
 
       emailjs.send("service_gvpt8yt", "template_4ut5xtk", templateParams)
-        .then(function() {
-          document.getElementById("message").textContent = 
-            "Форма отправлена! Ожидайте данные для регистрации от vovasokol438@gmail.com.";
+        .then(function(response) {
+          document.getElementById("message").textContent = "Ожидайте данные для регистрации от e-mail vovasokol438@gmail.com";
+          document.getElementById("register-form").reset();
         }, function(error) {
-          document.getElementById("message").textContent = "Ошибка отправки формы, попробуйте позже.";
-          console.error(error);
+          alert("Ошибка при отправке. Попробуйте снова.");
         });
     }
   </script>
+</head>
+<body>
+  <div class="register-box">
+    <h2>Регистрация на сайт "Говорит и показывает Баден"</h2>
+    <form id="register-form" onsubmit="event.preventDefault(); sendRegistration();">
+      <input type="text" id="name" placeholder="Имя" required>
+      <input type="text" id="surname" placeholder="Фамилия" required>
+      <input type="date" id="birthdate" placeholder="Дата рождения" required>
+      <input type="email" id="email" placeholder="E-mail" required>
+
+      <label><input type="radio" name="method" value="custom" checked> Свой пароль</label>
+      <label><input type="radio" name="method" value="generate"> Получить пароль при регистрации</label>
+      <input type="text" id="password" placeholder="Пароль">
+
+      <button type="submit">Зарегистрироваться</button>
+      <div class="message" id="message"></div>
+    </form>
+  </div>
 </body>
 </html>
