@@ -18,7 +18,7 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
-      width: 300px;
+      width: 320px;
     }
     input, select {
       display: block;
@@ -29,13 +29,14 @@
       border: 1px solid #aaa;
     }
     button {
-      padding: 8px 16px;
+      padding: 10px;
       border: none;
       border-radius: 6px;
       background: #0077cc;
       color: white;
       cursor: pointer;
       width: 100%;
+      margin-top: 10px;
     }
     button:hover {
       background: #005fa3;
@@ -44,6 +45,11 @@
       color: green;
       font-size: 14px;
       margin-top: 10px;
+    }
+    label {
+      display: block;
+      margin-top: 5px;
+      text-align: left;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -76,7 +82,8 @@
 
       emailjs.send("service_gvpt8yt", "template_4ut5xtk", templateParams)
         .then(function(response) {
-          document.getElementById("message").textContent = "Ожидайте данные для регистрации от e-mail vovasokol438@gmail.com";
+          document.getElementById("message").textContent =
+            "Ожидайте данные для регистрации от e-mail vovasokol438@gmail.com";
           document.getElementById("register-form").reset();
         }, function(error) {
           alert("Ошибка при отправке. Попробуйте снова.");
