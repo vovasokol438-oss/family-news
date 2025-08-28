@@ -75,9 +75,10 @@
   </div>
 
   <script>
-    // Проверяемый пользователь
+    // Список пользователей
     const users = {
-      "Admin": "BadenAdmin"
+      "Admin": "BadenAdmin",
+      "Гость": "Баден"
     };
 
     function login() {
@@ -85,8 +86,8 @@
       const password = document.getElementById("password").value.trim();
       const errorDiv = document.getElementById("error");
 
-      // Проверка регистра и совпадения пароля
-      if (username === "Admin" && password === "BadenAdmin") {
+      // Проверка по словарю users
+      if (users[username] && users[username] === password) {
         window.location.href = "secret.html";
       } else {
         errorDiv.textContent = "Неверный пароль или имя! Актуальный пароль можно узнать на канале \"Говорит и показывает Баден\"";
@@ -102,8 +103,4 @@
   </script>
 </body>
 </html>
-
-
-
-
 
