@@ -2,111 +2,56 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Регистрация на сайт "Говорит и показывает Баден"</title>
+  <title>Регистрация</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background: linear-gradient(135deg, #f9f9f9, #eaeaea);
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
-    .register-box {
+    .box {
       background: white;
-      padding: 20px 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 90%;
       text-align: center;
-      width: 320px;
     }
-    input, select {
-      display: block;
-      width: 100%;
+    input {
+      padding: 10px;
+      font-size: 16px;
       margin: 10px 0;
-      padding: 8px;
-      border-radius: 6px;
+      width: 90%;
+      border-radius: 8px;
       border: 1px solid #aaa;
     }
     button {
-      padding: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
       border: none;
-      border-radius: 6px;
-      background: #0077cc;
+      background: #28a745;
       color: white;
       cursor: pointer;
-      width: 100%;
-      margin-top: 10px;
+      transition: 0.3s;
     }
-    button:hover {
-      background: #005fa3;
-    }
-    .message {
-      color: green;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-    label {
-      display: block;
-      margin-top: 5px;
-      text-align: left;
-    }
+    button:hover { background: #218838; }
+    p a { color: #0077cc; text-decoration: none; }
+    p a:hover { text-decoration: underline; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("F_eRZhQRJfY_X-rTh"); // Ваш Public Key
-    })();
-
-    function sendRegistration() {
-      const name = document.getElementById("name").value.trim();
-      const surname = document.getElementById("surname").value.trim();
-      const birthdate = document.getElementById("birthdate").value;
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const method = document.querySelector('input[name="method"]:checked').value;
-
-      if(!name || !surname || !birthdate || !email || (method === 'custom' && !password)){
-        alert("Пожалуйста, заполните все поля!");
-        return;
-      }
-
-      const templateParams = {
-        name: name,
-        surname: surname,
-        birthdate: birthdate,
-        email: email,
-        password: method === 'custom' ? password : "Пароль будет сгенерирован",
-        method: method
-      };
-
-      emailjs.send("service_gvpt8yt", "template_4ut5xtk", templateParams)
-        .then(function(response) {
-          document.getElementById("message").textContent =
-            "Ожидайте данные для регистрации от e-mail vovasokol438@gmail.com";
-          document.getElementById("register-form").reset();
-        }, function(error) {
-          alert("Ошибка при отправке. Попробуйте снова.");
-        });
-    }
-  </script>
 </head>
 <body>
-  <div class="register-box">
-    <h2>Регистрация на сайт "Говорит и показывает Баден"</h2>
-    <form id="register-form" onsubmit="event.preventDefault(); sendRegistration();">
-      <input type="text" id="name" placeholder="Имя" required>
-      <input type="text" id="surname" placeholder="Фамилия" required>
-      <input type="date" id="birthdate" placeholder="Дата рождения" required>
-      <input type="email" id="email" placeholder="E-mail" required>
-
-      <label><input type="radio" name="method" value="custom" checked> Свой пароль</label>
-      <label><input type="radio" name="method" value="generate"> Получить пароль при регистрации</label>
-      <input type="text" id="password" placeholder="Пароль">
-
-      <button type="submit">Зарегистрироваться</button>
-      <div class="message" id="message"></div>
-    </form>
+  <div class="box">
+    <h2>Регистрация</h2>
+    <input type="text" placeholder="Имя или логин">
+    <input type="password" placeholder="Пароль">
+    <button>Зарегистрироваться</button>
+    <p>Уже есть аккаунт? <a href="index.html">Войти</a></p>
   </div>
 </body>
 </html>
